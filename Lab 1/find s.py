@@ -1,23 +1,27 @@
 import pandas as pd
 import numpy as np
  
-data = pd.read_csv(r"datalab.csv")
-
+#to read the data in the csv file
+data = pd.read_csv("data.csv")
+print(data,"n")
  
+#making an array of all the attributes
 d = np.array(data)[:,:-1]
-print("\n The attributes are: ",d)
+print("n The attributes are: ",d)
  
+#segragating the target that has positive and negative examples
 target = np.array(data)[:,-1]
-print("\n The target is: ",target)
+print("n The target is: ",target)
  
+#training function to implement find-s algorithm
 def train(c,t):
     for i, val in enumerate(t):
-        if val == "Yes":
+        if val == "yes":
             specific_hypothesis = c[i].copy()
             break
              
     for i, val in enumerate(c):
-        if t[i] == "Yes":
+        if t[i] == "yes":
             for x in range(len(specific_hypothesis)):
                 if val[x] != specific_hypothesis[x]:
                     specific_hypothesis[x] = '?'
@@ -25,5 +29,5 @@ def train(c,t):
                     pass
                  
     return specific_hypothesis
-
-print("\n The final hypothesis is:",train(d,target))
+ 
+print("n The final hypothesis is:",train(d,target))
